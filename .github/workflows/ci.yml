@@ -455,7 +455,7 @@ jobs:
          mkdir .\apps\cavex\saves\
          mv assets .\apps\cavex\
          mv resources\*.shader .\apps\cavex\assets\
-         mv build_wpc\cavex .\apps\cavex\cavex.exe
+         mv build_wpc .\apps\cavex\cavex.exe
          mv config_pc.json .\apps\cavex\config.json
          Compress-Archive -Path .\apps\cavex\ -DestinationPath cavex.zip
  
