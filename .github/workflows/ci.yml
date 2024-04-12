@@ -229,6 +229,10 @@ jobs:
        vcpkg install glfw3
        vcpkg install glew
        vcpkg install zlib
+       vcpkg install pthread
+       vcpkg install pthreads
+       vcpkg install pthread-stubs
+       vcpkg install pthreadpool
 
     - name: Make
       run: |
@@ -249,7 +253,8 @@ jobs:
         Compress-Archive -Path .\apps\cavex\ -DestinationPath cavex.zip
 
     - name: Upload Artifacts
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: PC zip
-        path: cavex.zip
+        path: .
