@@ -228,6 +228,7 @@ jobs:
        vcpkg integrate install
        vcpkg install glfw3
        vcpkg install glew
+       vcpkg install zlib
 
     - name: Make
       run: |
