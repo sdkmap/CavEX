@@ -170,8 +170,7 @@ jobs:
 
   WPC:
     name: WPC build
-    runs-on: ubuntu-latest
-
+    runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -180,31 +179,32 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: 'lvandeve/lodepng'
-        path: tempsource/lodepng
+        path: tempsource\lodepng
 
     - name: Checkout mlib
       uses: actions/checkout@v4
       with:
         repository: 'P-p-H-d/mlib'
-        path: tempsource/m-lib
+        path: tempsource\m-lib
 
     - name: Checkout cNBT
       uses: actions/checkout@v4
       with:
         repository: 'chmod222/cNBT'
-        path: tempsource/cNBT
+        path: tempsource\cNBT
 
     - name: Checkout parson
       uses: actions/checkout@v4
       with:
         repository: 'kgabis/parson'
-        path: tempsource/parson
+        path: tempsource\parson
 
     - name: Checkout cglm
       uses: actions/checkout@v4
       with:
         repository: 'recp/cglm'
-        path: tempsource/cglm
+        path: tempsource\cglm
+
 
     - name: Move dependencies
       run: |
