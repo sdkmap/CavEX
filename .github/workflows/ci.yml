@@ -242,7 +242,7 @@ jobs:
         mkdir build_pc
         cd build_pc
         cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ..
-        
+        msbuild cavex.sln
       env: 
         C_INCLUDE_PATH: "${{ github.workspace }}/source/"
 
