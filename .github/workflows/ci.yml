@@ -586,9 +586,9 @@ jobs:
           $env:CC = "ccache gcc"
           mkdir build_wpc
           cd build_wpc
-          D:\a\dingusppc\dingusppc\msys64\usr\bin\bash -lc "ccache --zero-stats"
-          D:\a\dingusppc\dingusppc\msys64\usr\bin\bash -lc "cmake .. && make"
-          D:\a\dingusppc\dingusppc\msys64\usr\bin\bash -lc "ccache --show-stats"
+          D:\a\CavEX\CavEX\msys64\usr\bin\bash -lc "ccache --zero-stats"
+          D:\a\CavEX\CavEX\msys64\usr\bin\bash -lc "cmake .. && make"
+          D:\a\CavEX\CavEX\msys64\usr\bin\bash -lc "ccache --show-stats"
           Write-Output "Finished build at $(Get-Date -Format u)"
 
 
