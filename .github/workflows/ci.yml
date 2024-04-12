@@ -205,6 +205,9 @@ jobs:
         repository: 'recp/cglm'
         path: tempsource\cglm
 
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1
+
 
     - name: Move dependencies
       run: |
@@ -239,7 +242,7 @@ jobs:
         mkdir build_pc
         cd build_pc
         cmake -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ..
-        make -j 4
+        
       env: 
         C_INCLUDE_PATH: "${{ github.workspace }}/source/"
 
