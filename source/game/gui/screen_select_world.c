@@ -32,6 +32,7 @@
 #include <m-lib/m-string.h>
 #include <string.h>
 #include <time.h>
+#include <sys/stat.h>
 
 static struct stack* worlds = NULL;
 
@@ -83,34 +84,39 @@ static void screen_sworld_reset(struct screen* s, int width, int height) {
 	if(d) {
 		struct dirent* dir;
 		while((dir = readdir(d))) {
-			if(dir->d_type & DT_DIR && *dir->d_name != '.') {
-				struct world_option opt;
-				string_init_printf(opt.path, "%s/%s", saves_path, dir->d_name);
+			if(dir->d_name[0] != '.') {
+				struct stat st;
+				char dir_path[1024];
+				sprintf(dir_path, "%s/%s", saves_path, dir->d_name);
+				if(stat(dir_path, &st) == 0 && S_ISDIR(st.st_mode)) {
+					struct world_option opt;
+					string_init_printf(opt.path, "%s/%s", saves_path, dir->d_name);
 
-				struct level_archive la;
-				if(level_archive_create(&la, opt.path)) {
-					char name[64];
+					struct level_archive la;
+					if(level_archive_create(&la, opt.path)) {
+						char name[64];
 
-					if(!level_archive_read(&la, LEVEL_NAME, name, sizeof(name)))
-						strcpy(name, "Missing name");
+						if(!level_archive_read(&la, LEVEL_NAME, name, sizeof(name)))
+							strcpy(name, "Missing name");
 
-					string_init_set_str(opt.name, name);
-					string_init_set_str(opt.directory, dir->d_name);
+						string_init_set_str(opt.name, name);
+						string_init_set_str(opt.directory, dir->d_name);
 
-					if(!level_archive_read(&la, LEVEL_DISK_SIZE, &opt.byte_size,
-										   0))
-						opt.byte_size = 0;
+						if(!level_archive_read(&la, LEVEL_DISK_SIZE, &opt.byte_size,
+											   0))
+							opt.byte_size = 0;
 
-					if(!level_archive_read(&la, LEVEL_LAST_PLAYED,
-										   &opt.last_access, 0))
-						opt.last_access = 0;
+						if(!level_archive_read(&la, LEVEL_LAST_PLAYED,
+											   &opt.last_access, 0))
+							opt.last_access = 0;
 
-					opt.last_access /= 1000;
+						opt.last_access /= 1000;
 
-					level_archive_destroy(&la);
-					stack_push(worlds, &opt);
-				} else {
-					string_clear(opt.path);
+						level_archive_destroy(&la);
+						stack_push(worlds, &opt);
+					} else {
+						string_clear(opt.path);
+					}
 				}
 			}
 		}
