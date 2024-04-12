@@ -335,6 +335,8 @@ jobs:
             mingw-w64-i686-zlib
             mingw-w64-i686-glew
             mingw-w64-i686-glfw
+            zlib-devel
+            zlib
 
     - name: Make
       run: |
