@@ -27,7 +27,7 @@ void time_reset() { }
 
 ptime_t time_get() {
 	struct timespec t;
-	clock_gettime(CLOCK_MONOTONIC_RAW, &t);
+	clock_gettime(CLOCK_MONOTONIC, &t);
 	return t;
 }
 
